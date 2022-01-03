@@ -1,5 +1,6 @@
 pragma solidity >=0.7.0 <0.9.0;
 
+// A smart contract for creating a will and distribute the fortune(ETH) accordingly
 contract will {
 
     address owner;
@@ -30,4 +31,16 @@ contract will {
     // Mapping of family wallet addresses and relevant amount of inheritance from the fortune
     mapping(address => uint) inheritance;
 
+    // Set inheritances for each family member(wallet)
+    function setInheritance(address payable wallet, uint amount) public {
+        familyWallets.push(wallet);
+        inheritance[wallet] = amount;
+    }
+
+    // Transfer funds to family member wallets
+    function payout() private mustBeDeceased {
+        for(uint i=0; i<familyWallets.length; i++) {
+            familyWallets[i].transfer(inheritance[familyWallets[i]]);
+        }
+    }
 }
