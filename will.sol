@@ -32,7 +32,7 @@ contract will {
     mapping(address => uint) inheritance;
 
     // Set inheritances for each family member(wallet)
-    function setInheritance(address payable wallet, uint amount) public {
+    function setInheritance(address payable wallet, uint amount) public onlyOwner {
         familyWallets.push(wallet);
         inheritance[wallet] = amount;
     }
