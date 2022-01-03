@@ -43,4 +43,10 @@ contract will {
             familyWallets[i].transfer(inheritance[familyWallets[i]]);
         }
     }
+
+    // Oracle switch simiulation
+    function deceasedTrigger() public onlyOwner {
+        deceased = true;
+        payout();
+    }
 }
